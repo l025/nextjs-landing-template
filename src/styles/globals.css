@@ -12,3 +12,24 @@
 
 @layer utilities {
 }
+
+html {
+  scroll-behavior: initial;
+}
+
+body.hide_header header {
+  transform: translateY(-100%);
+}
+
+body.scrolled header {
+}
+
+@media (min-width: 1024px) {
+  body.scrolled .container {
+    padding: 10px 0;
+  }
+
+  body.scrolled svg {
+    height: 38px;
+  }
+}
