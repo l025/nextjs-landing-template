@@ -1,3 +1,4 @@
+import HeroSection from "@/components/hero"
 import { Header } from "@/components/layout/header"
 import { MenuBtn } from "@/components/menu-btn"
 import Link from "next/link"
@@ -7,7 +8,8 @@ export default function Home() {
     <>
       <div className="flex min-h-screen items-start">
         <Header />
-        <main>
+        <main className="w-full">
+          <HeroSection />
           <div className="py-10">1</div>
           <div className="py-10">11</div>
           <div className="py-10">111</div>
