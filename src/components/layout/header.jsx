@@ -5,7 +5,7 @@ import { Logo } from "./logo"
 export const Header = () => {
   return (
     <>
-      <header className="min-w-screen fixed left-0 top-0 z-10 w-screen transition-all duration-500 ease-out">
+      <header className="top-nav min-w-screen fixed left-0 top-0 z-10 w-screen transition-all duration-500 ease-out">
         <div className="container flex items-center justify-between p-6">
           <Logo />
           <nav className="flex max-h-6 gap-4 text-sm font-light">

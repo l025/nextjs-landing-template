@@ -11,6 +11,8 @@ import {
 } from "react"
 import debounce from "@/util/debounce"
 import Lenis from "lenis"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 const PageContext = createContext({
   lenis: null,
@@ -40,32 +42,31 @@ export const PageProvider = ({ children }) => {
       touchMultiplier: 2,
     })
 
-    let lastHeight = 0
-    let hideNav = false
-    let isScrolled = false
+    gsap.registerPlugin(ScrollTrigger)
 
-    lenis.on("scroll", ({ scroll }) => {
-      debounce(() => (lastHeight = scroll))()
-
-      if (lastHeight < scroll && scroll > 160 && !hideNav) {
-        document.body.classList.add("hide_header")
-        hideNav = true
-      }
-      if (lastHeight >= scroll && scroll > 160 && hideNav) {
-        document.body.classList.remove("hide_header")
-        hideNav = false
-      }
-
-      if (lastHeight < scroll && scroll > 220 && !isScrolled) {
-        document.body.classList.add("scrolled")
-        isScrolled = true
-      }
-
-      if (lastHeight >= scroll && scroll < 220 && isScrolled) {
-        document.body.classList.remove("scrolled")
-        isScrolled = false
-      }
+    // top nav
+    gsap.to(".top-nav", {
+      marginTop: 0,
+      alpha: 1,
+      duration: 0.5,
     })
+    const showtopNav = gsap
+      .from(".top-nav", {
+        yPercent: -100,
+        paused: true,
+        duration: 0.5,
+        ease: "power2.out",
+      })
+      .progress(1)
+
+    ScrollTrigger.create({
+      start: "top top",
+      end: "max",
+      onUpdate: (self) => {
+        self.direction === -1 ? showtopNav.play() : showtopNav.reverse()
+      },
+    })
+
     setLenis(lenis)
 
     return () => {
