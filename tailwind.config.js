@@ -9,7 +9,17 @@ module.exports = {
     container: {
       center: true,
     },
-    extend: {},
+    extend: {
+      animation: {
+        "marquee-x": 'marquee-x  4s linear infinite',
+      },
+      keyframes: {
+        "marquee-x": {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+      },
+    },
   },
   plugins: [],
 }

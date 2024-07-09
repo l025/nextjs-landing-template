@@ -1,10 +1,12 @@
 "use client"
 
 import gsap from "gsap"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { LogoIcon } from "./icons/logo"
 
 export default function HeroSection() {
+  const marqueeRef = useRef(null)
+
   useEffect(() => {
     const titles = document.querySelectorAll(".main-hero h1")
     const tl = gsap.timeline({ defaults: { duration: 1 } })
@@ -26,13 +28,22 @@ export default function HeroSection() {
         delay,
       )
     })
+    tl.to(
+      marqueeRef?.current,
+      {
+        opacity: 1,
+        ease: "power1.in",
+      },
+      "-=1",
+    )
 
     return () => {}
   }, [])
 
   return (
     <>
-      <section className="main-hero flex h-screen items-center justify-center">
+      <section className="main-hero flex h-screen flex-col justify-between">
+        <div className="flex-1"></div>
         <div className="container text-center">
           <h1 className="flex flex-wrap justify-center gap-4 text-[6rem] font-thin">
             <span className="inline-block overflow-hidden">
@@ -73,6 +84,41 @@ export default function HeroSection() {
               </span>
             </span>
           </h1>
+        </div>
+        <div className="flex-1"></div>
+
+        <div className="">
+          <div
+            ref={marqueeRef}
+            className="marquee w-full border-y border-neutral-300 opacity-0"
+          >
+            <div className="group flex h-full cursor-pointer items-center overflow-hidden whitespace-nowrap">
+              <span className="group-hover:pause animate-marquee-x py-2">
+                Lorem ipsum dolor sit©&nbsp;
+              </span>
+              <span className="group-hover:pause animate-marquee-x py-2">
+                Lorem ipsum dolor sit©&nbsp;
+              </span>
+              <span className="group-hover:pause animate-marquee-x py-2">
+                Lorem ipsum dolor sit©&nbsp;
+              </span>
+              <span className="group-hover:pause animate-marquee-x py-2">
+                Lorem ipsum dolor sit©&nbsp;
+              </span>
+              <span className="group-hover:pause animate-marquee-x py-2">
+                Lorem ipsum dolor sit©&nbsp;
+              </span>
+              <span className="group-hover:pause animate-marquee-x py-2">
+                Lorem ipsum dolor sit©&nbsp;
+              </span>
+              <span className="group-hover:pause animate-marquee-x py-2">
+                Lorem ipsum dolor sit©&nbsp;
+              </span>
+              <span className="group-hover:pause animate-marquee-x py-2">
+                Lorem ipsum dolor sit©&nbsp;
+              </span>
+            </div>
+          </div>
         </div>
       </section>
     </>
